@@ -1,7 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from "react-native";
 
-function Symbols(props) {
+const areEqual = (prevProps, nextProps) => {
+    return (prevProps.title === nextProps.title)
+};
+const memosym = React.memo(function Symbols(props) {
     const symbols = ['(', ')', '%', 'C'];
     console.log('symbols');
 
@@ -12,9 +15,9 @@ function Symbols(props) {
             </TouchableOpacity>
         )
     })
-}
+},areEqual);
 
-export default Symbols;
+export default memosym;
 
 const styles = StyleSheet.create({
 

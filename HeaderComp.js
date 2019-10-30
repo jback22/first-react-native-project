@@ -8,9 +8,11 @@ function HeaderComp() {
     const [total, setTotal] = useState(0.0);
     const [screen, setScreen] = useState('');
     const [isNumb,setIsNumb] = useState(false);
+    const [value,setValue] = useState();
 
 
     const Evaluate = () => {
+        console.log('eva',screen);
         if (screen.length !== 0){
             try {
                 let screen_array = screen.toString().split('');
@@ -30,17 +32,23 @@ function HeaderComp() {
                 }
             }
             catch (e) {
+                console.log(e);
                 setScreen([])
             }
         }
-
-
-
     };
     const AddScreen = (value)=>{
-        setScreen(screen + value);
-
+            setValue(value);
     };
+    useEffect(() => {
+        if (value === '='){
+            Evaluate()
+        }else{
+            setScreen(screen + value);
+            setValue('')
+        }
+
+    },[value]);
     useEffect(() => {
 
         if (typeof screen !== "number"){
@@ -49,7 +57,6 @@ function HeaderComp() {
             let last_element = screen_array[screen_array.length - 1];
             let second_last_element = screen_array[screen_array.length - 2];
             if (isNaN(Number(last_element)) && last_element === second_last_element || (['+','-'].includes(second_last_element) && ['*','/','.','+','-'].includes(last_element))) {
-
                 screen_array.pop();
                 setScreen(screen_array.join(''))
             } else if (last_element === 'C') {
@@ -81,7 +88,7 @@ function HeaderComp() {
             <Text style={{fontSize:22,color:'#EF3D75',fontWeight:'bold'}}>Calculator App</Text>
             <View style={styles.calculationBox}>
                 <Text style={{textAlign: 'right', marginRight: 20, fontSize: 19}}>{total}</Text>
-                <View style={styles.Screen}>
+                <View>
                     <Text style={{textAlign: 'right', marginRight: 20, fontSize: 30}}>{screen}</Text>
                 </View>
             </View>
@@ -114,8 +121,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
 
     },
-    Screen:{},
-
     containerflexrow: {
         flexDirection: 'row',
         marginTop: 5

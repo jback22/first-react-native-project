@@ -1,7 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from "react-native";
-
-function Operators(props) {
+const areEqual = (prevProps, nextProps) => {
+    return (prevProps.title === nextProps.title)
+};
+const memoop=React.memo(function Operators(props) {
 
     const operators = ['+', '*', '-', '/'];
     console.log('operators');
@@ -13,9 +15,9 @@ function Operators(props) {
             </TouchableOpacity>
         )
     })
-}
+},areEqual);
 
-export default Operators;
+export default memoop;
 
 const styles = StyleSheet.create({
     number: {
