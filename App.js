@@ -1,21 +1,19 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { StyleSheet, Text, View ,Button } from 'react-native';
+import HeaderComp from "./HeaderComp";
+
 
 export default function App() {
+
   return (
     <View style={styles.container}>
-      <Text>Hi!</Text>
-      <Text>This is my first app</Text>
-      <Button title='Change me' />
+      <HeaderComp/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop:50,
   },
 });
